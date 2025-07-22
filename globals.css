@@ -1,0 +1,21 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: white;
+}
+
+/* Colores */
+:root{
+    color-scheme: light dark;
+
+    --text-color-light:#1865f2;
+    --text-color-dark:#f8fafc;
+    --bg-color-light:#FFFFFF;
+    --bg-color-dark:#171717;
+    --primary-color-light: #1865f2;
+    --primary-color-dark:#1865f2;
+    --input-background: #ffffff00; /* Fondo de inputs blanco */
+}
