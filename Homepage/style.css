@@ -27,7 +27,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(/Pictures/4k-Windows-11-Abstract-Dark-Blue-Bloom-4K-Wallpaper.jpg);
+    background-image: url(../Pictures/4k-Windows-11-Abstract-Dark-Blue-Bloom-4K-Wallpaper.jpg);
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -95,6 +95,12 @@ body::before {
     position: relative;
     transition: color 0.3s ease;
     border-radius: 5px;
+    /* Aseguramos que los íconos (si existieran) no se vean en la versión de escritorio */
+    display: block;
+}
+
+.lat-link svg {
+    display: none; /* Oculta los SVG en la vista de escritorio */
 }
 
 .lat-link::before {
@@ -645,71 +651,19 @@ body::before {
     .detail-page-grid {
         grid-template-columns: 1fr;
     }
+    
+    #left-column, #right-column {
+        align-items: center;
+    }
 }
 
 @media (max-width: 767px) {
-    #lat {
-        width: 100%;
-        height: 5rem; 
-        bottom: 0;
-        top: auto;
-        flex-direction: row;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        border-right: none;
-        padding: 0.5rem 0;
-    }
-
-    #lat-container {
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: stretch; /* Estira los items para que ocupen la altura */
-    }
-
-    #lat-full-logo-container {
-        display: none;
-    }
-
-    #lat-links-container {
-        flex-direction: row;
-        gap: 0; 
-        justify-content: space-around;
-        align-items: stretch;
-        width: 100%;
-    }
-
-    .lat-link {
-        flex-grow: 1; 
-        display: flex;
-        flex-direction: column; 
-        justify-content: center;
-        align-items: center;
-        gap: 0.2rem; 
-        font-size: 0.75rem; 
-        color: rgba(238, 238, 238, 0.6); 
-        padding: 0;
-        border-radius: 0;
-    }
-
-    .lat-link::before {
-        display: none;
-    }
-
-    .lat-link svg {
-        width: 1.5rem;
-        height: 1.5rem;
-        transition: color 0.3s ease;
-    }
-    
-    .lat-link.active-lat-link,
-    .lat-link:hover {
-        color: var(--blue-accent); 
-    }
-}
+/* --- NAVEGACIÓN SUPERIOR (MÓVIL) --- */
     #nav {
         justify-content: center;
         left: 0;
         width: 100%;
-        padding: 0 1.5rem; 
+        padding: 0 1.5rem;
     }
 
     #nav-container {
@@ -717,21 +671,91 @@ body::before {
     }
 
     #nav-mobile-logo {
-        display: flex; 
+        display: flex;
     }
 
     #userProfileContainer {
         display: none;
     }
 
+    /* --- CONTENIDO PRINCIPAL (MÓVIL) --- */
     #content {
         margin-left: 0;
         width: 100%;
-        padding: 1rem;
-        padding-top: 6rem;
-        padding-bottom: 6rem;
+        padding: 1.5rem;
+        padding-top: 6rem; 
+        padding-bottom: 7rem; 
+    }
+    
+    .content-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem; 
+    }
+    
+    #left-column, #right-column {
+        gap: 1.5rem;
     }
 
-    .content-header h1 {
-        font-size: 2rem;
+    /* --- NAVEGACIÓN INFERIOR (MÓVIL) - MEJORADA --- */
+    #lat {
+        width: 100%;
+        height: 4.5rem; 
+        bottom: 0;
+        top: auto;
+        flex-direction: row;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: none;
+        padding: 0;
     }
+
+    #lat-container {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #lat-full-logo-container {
+        display: none;
+    }
+
+    #lat-links-container {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: space-around;
+    }
+
+    .lat-link svg {
+        display: none;
+    }
+    
+    .lat-link {
+        color: rgba(238, 238, 238, 0.7);
+        font-size: 0.9rem;
+        font-weight: bold;
+        padding: 0 0.5rem;
+        border-radius: 6px;
+        text-align: center;
+        height: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        margin: 0 0.5rem;
+    }
+
+    .lat-link.active-lat-link {
+        background-color: var(--blue-accent);
+        color: white;
+    }
+    .lat-link:hover {
+        background-color: transparent;
+        color: rgba(238, 238, 238, 0.7);
+    }
+    .lat-link.active-lat-link:hover {
+        background-color: var(--blue-accent);
+        color: white;
+    }
+}
