@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignaciones - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lato&display=swap" rel="stylesheet">
+    <link rel="icon" href="/Pictures/Elementary_logo.svg.png">
+</head>
+<body>
+    <nav id="nav"></nav>
+    <aside id="lat"></aside>
+
+    <main id="content">
+        <div class="content-header">
+            <h1>Asignaciones y Calificaciones</h1>
+            <p>Revisa el estado de tus entregas y tu rendimiento académico.</p>
+        </div>
+
+        <div class="assignments-grid">
+            <div class="card assignment-list">
+                <h2>Asignaciones Recientes</h2>
+                <ul>
+                    <li>
+                        <span><strong>Cálculo I:</strong> Ejercicio 5</span>
+                        <span class="assignment-status status-pending">Pendiente</span>
+                    </li>
+                    <li>
+                        <span><strong>Física II:</strong> Laboratorio 3</span>
+                        <span class="assignment-status status-graded">8.5 / 10</span>
+                    </li>
+                    <li>
+                        <span><strong>Programación Web:</strong> Proyecto Final</span>
+                        <span class="assignment-status status-graded">9.5 / 10</span>
+                    </li>
+                     <li>
+                        <span><strong>Diseño UX/UI:</strong> Entrega 2</span>
+                        <span class="assignment-status status-pending">Pendiente</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card grades-summary">
+                <h2>Rendimiento General</h2>
+                <div class="progress-circle" data-progress="82">82%</div>
+                <p>Promedio General</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

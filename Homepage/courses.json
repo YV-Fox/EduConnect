@@ -1,0 +1,44 @@
+{
+    "web-adv": {
+        "name": "Programación Web Avanzada",
+        "prof": "Ada Lovelace",
+        "image": "../Pictures/codes-5091352_1280-1080x648.jpg",
+        "content": [
+            { "type": "video", "title": "Video de Bienvenida" },
+            { "type": "pdf", "title": "Syllabus del Curso" }
+        ]
+    },
+    "ai-intro": {
+        "name": "Inteligencia Artificial para Principiantes",
+        "prof": "Alan Turing",
+        "image": "../Pictures/Frame-57.png",
+        "content": [
+            { "type": "video", "title": "¿Qué es la IA?" },
+            { "type": "pdf", "title": "Historia de la IA" }
+        ]
+    },
+    "ux-ui": {
+        "name": "Diseño UX/UI desde Cero",
+        "prof": "Grace Hopper",
+        "image": "../Pictures/codigo-programacion.jpg",
+        "content": [
+            { "type": "video", "title": "Principios del Diseño" }
+        ]
+    },
+    "ciberseguridad": {
+        "name": "Ciberseguridad Esencial",
+        "prof": "Kevin Mitnick",
+        "image": "../Pictures/what-is-cybersecurity.jpg",
+        "content": [
+            { "type": "video", "title": "Introducción a la Seguridad" }
+        ]
+    },
+    "marketing-digital": {
+        "name": "Marketing Digital Estratégico",
+        "prof": "Philip Kotler",
+        "image": "../Pictures/GettyImages-1374879082.png",
+        "content": [
+            { "type": "video", "title": "Fundamentos de SEO" }
+        ]
+    }
+}

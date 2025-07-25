@@ -1,105 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("register-form");
-  const inputs = form.querySelectorAll("input");
-  const registerButton = document.getElementById("register-button");
+    const loginForm = document.getElementById("login-form");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const loginButton = document.getElementById("login-button");
+    let users = [];
 
-  const passwordInput = document.getElementById("password");
-  const passwordRequirements = document.getElementById("password-requirements");
-  const pwLength = document.getElementById("pw-length");
-  const pwLetter = document.getElementById("pw-letter");
-  const pwNumber = document.getElementById("pw-number");
-  const pwSymbol = document.getElementById("pw-symbol");
-
-  const regex = {
-    nombre: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
-    apellido: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
-    correo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    cedula: /^[A-Za-z]{1}-?\d+$/,
-    password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
-  };
-
-  function validarCampo(input, expresion) {
-    const valor = input.value.trim();
-    if (valor === "") {
-      input.classList.remove("input-error");
-      return false;
-    }
-    if (!expresion.test(valor)) {
-      input.classList.add("input-error");
-      return false;
-    } else {
-      input.classList.remove("input-error");
-      return true;
-    }
-  }
-
-  function validarPassword() {
-    const pwd = passwordInput.value;
-    const validLength = pwd.length >= 8;
-    const hasLetter = /[A-Za-z]/.test(pwd);
-    const hasNumber = /\d/.test(pwd);
-    const hasSymbol = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(pwd);
-
-    if (pwd.length > 0) {
-      passwordRequirements.classList.add("active");
-    } else {
-      passwordRequirements.classList.remove("active");
+    async function loadUsers() {
+        try {
+            const response = await fetch('users.json');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            users = await response.json();
+        } catch (error) {
+            console.error("Error al cargar los usuarios:", error);
+            loginButton.disabled = true;
+        }
     }
 
-    pwLength.classList.toggle("valid", validLength);
-    pwLetter.classList.toggle("valid", hasLetter);
-    pwNumber.classList.toggle("valid", hasNumber);
-    pwSymbol.classList.toggle("valid", hasSymbol);
-
-    const cumpleTodo = validLength && hasLetter && hasNumber && hasSymbol;
-
-    if (pwd.length > 0 && !cumpleTodo) {
-      passwordInput.classList.add("input-error");
-    } else {
-      passwordInput.classList.remove("input-error");
+    function validateForm() {
+        const isUsernameValid = usernameInput.value.trim() !== "";
+        const isPasswordValid = passwordInput.value.trim() !== "";
+        loginButton.disabled = !(isUsernameValid && isPasswordValid);
     }
 
-    return cumpleTodo;
-  }
+    loadUsers();
 
-  function validarFormulario() {
-    const nombreValido = validarCampo(form.nombre, regex.nombre);
-    const apellidoValido = validarCampo(form.apellido, regex.apellido);
-    const correoValido = validarCampo(form.correo, regex.correo);
-    const cedulaValida = validarCampo(form.cedula, regex.cedula);
-    const passwordValida = validarPassword();
+    // Validar en cada input del usuario
+    usernameInput.addEventListener("input", validateForm);
+    passwordInput.addEventListener("input", validateForm);
 
-    const todosValidos = nombreValido && apellidoValido && correoValido && cedulaValida && passwordValida;
+    loginForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        if (loginButton.disabled) return;
 
-    registerButton.disabled = !todosValidos;
-  }
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value;
+        const foundUser = users.find(user => user.username === username && user.password === password);
 
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      validarFormulario();
-    });
-  });
-
-  passwordInput.addEventListener("focus", () => {
-    passwordRequirements.classList.add("active");
-  });
-
-  passwordInput.addEventListener("blur", () => {
-    if (passwordInput.value.trim() === "") {
-      passwordRequirements.classList.remove("active");
-    }
-  });
-  let requirementsTimeout;
-
-passwordInput.addEventListener("focus", () => {
-  clearTimeout(requirementsTimeout);
-  passwordRequirements.classList.add("active");
-});
-
-passwordInput.addEventListener("blur", () => {
-  requirementsTimeout = setTimeout(() => {
-    passwordRequirements.classList.remove("active");
-
-    }, 150); 
+        if (foundUser) {
+            localStorage.setItem('loggedInUsername', foundUser.username);
+            window.location.href = "homepage/start.html";
+        } else {
+            alert("Nombre de usuario o contraseña incorrectos.");
+        }
     });
 });

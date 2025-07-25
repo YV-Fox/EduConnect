@@ -1,105 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("register-form");
-  const inputs = form.querySelectorAll("input");
-  const registerButton = document.getElementById("register-button");
+    const form = document.getElementById("register-form");
+    const inputs = form.querySelectorAll("input");
+    const registerButton = document.getElementById("register-button");
+    const passwordInput = document.getElementById("password");
+    const requirementsList = document.getElementById("password-requirements");
+    const requirements = {
+        length: document.getElementById("pw-length"),
+        letter: document.getElementById("pw-letter"),
+        number: document.getElementById("pw-number"),
+        symbol: document.getElementById("pw-symbol")
+    };
 
-  const passwordInput = document.getElementById("password");
-  const passwordRequirements = document.getElementById("password-requirements");
-  const pwLength = document.getElementById("pw-length");
-  const pwLetter = document.getElementById("pw-letter");
-  const pwNumber = document.getElementById("pw-number");
-  const pwSymbol = document.getElementById("pw-symbol");
+    const regex = {
+        nombre: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,}$/,
+        apellido: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,}$/,
+        correo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        cedula: /^[VvEe]{1}-?\d{7,8}$/,
+    };
 
-  const regex = {
-    nombre: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
-    apellido: /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/,
-    correo: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    cedula: /^[A-Za-z]{1}-?\d+$/,
-    password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
-  };
-
-  function validarCampo(input, expresion) {
-    const valor = input.value.trim();
-    if (valor === "") {
-      input.classList.remove("input-error");
-      return false;
-    }
-    if (!expresion.test(valor)) {
-      input.classList.add("input-error");
-      return false;
-    } else {
-      input.classList.remove("input-error");
-      return true;
-    }
-  }
-
-  function validarPassword() {
-    const pwd = passwordInput.value;
-    const validLength = pwd.length >= 8;
-    const hasLetter = /[A-Za-z]/.test(pwd);
-    const hasNumber = /\d/.test(pwd);
-    const hasSymbol = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(pwd);
-
-    if (pwd.length > 0) {
-      passwordRequirements.classList.add("active");
-    } else {
-      passwordRequirements.classList.remove("active");
+    function validarPassword() {
+        const pwd = passwordInput.value;
+        const checks = {
+            length: pwd.length >= 8,
+            letter: /[A-Za-z]/.test(pwd),
+            number: /\d/.test(pwd),
+            symbol: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(pwd)
+        };
+        
+        Object.keys(checks).forEach(key => {
+            requirements[key].classList.toggle('valid', checks[key]);
+        });
+        
+        return Object.values(checks).every(Boolean);
     }
 
-    pwLength.classList.toggle("valid", validLength);
-    pwLetter.classList.toggle("valid", hasLetter);
-    pwNumber.classList.toggle("valid", hasNumber);
-    pwSymbol.classList.toggle("valid", hasSymbol);
-
-    const cumpleTodo = validLength && hasLetter && hasNumber && hasSymbol;
-
-    if (pwd.length > 0 && !cumpleTodo) {
-      passwordInput.classList.add("input-error");
-    } else {
-      passwordInput.classList.remove("input-error");
+    function validarFormulario() {
+        const isNombreValid = regex.nombre.test(form.nombre.value);
+        const isApellidoValid = regex.apellido.test(form.apellido.value);
+        const isCorreoValid = regex.correo.test(form.correo.value);
+        const isCedulaValid = regex.cedula.test(form.cedula.value);
+        const isPasswordValid = validarPassword();
+        
+        registerButton.disabled = !(isNombreValid && isApellidoValid && isCorreoValid && isCedulaValid && isPasswordValid);
     }
 
-    return cumpleTodo;
-  }
-
-  function validarFormulario() {
-    const nombreValido = validarCampo(form.nombre, regex.nombre);
-    const apellidoValido = validarCampo(form.apellido, regex.apellido);
-    const correoValido = validarCampo(form.correo, regex.correo);
-    const cedulaValida = validarCampo(form.cedula, regex.cedula);
-    const passwordValida = validarPassword();
-
-    const todosValidos = nombreValido && apellidoValido && correoValido && cedulaValida && passwordValida;
-
-    registerButton.disabled = !todosValidos;
-  }
-
-  inputs.forEach(input => {
-    input.addEventListener("input", () => {
-      validarFormulario();
+    inputs.forEach(input => {
+        input.addEventListener("input", validarFormulario);
     });
-  });
 
-  passwordInput.addEventListener("focus", () => {
-    passwordRequirements.classList.add("active");
-  });
-
-  passwordInput.addEventListener("blur", () => {
-    if (passwordInput.value.trim() === "") {
-      passwordRequirements.classList.remove("active");
-    }
-  });
-  let requirementsTimeout;
-
-passwordInput.addEventListener("focus", () => {
-  clearTimeout(requirementsTimeout);
-  passwordRequirements.classList.add("active");
-});
-
-passwordInput.addEventListener("blur", () => {
-  requirementsTimeout = setTimeout(() => {
-    passwordRequirements.classList.remove("active");
-
-    }, 150); 
+    passwordInput.addEventListener("focus", () => requirementsList.classList.add("active"));
+    passwordInput.addEventListener("blur", () => requirementsList.classList.remove("active"));
+    
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!registerButton.disabled) {
+            const username = form.nombre.value.trim();
+            alert(`¡Registro exitoso, ${username}! Redirigiendo...`);
+            // Simulación de inicio de sesión tras registro
+            localStorage.setItem('loggedInUsername', username);
+            window.location.href = "homepage/start.html";
+        }
     });
 });
