@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EduConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lato&display=swap" rel="stylesheet">
+    <link rel="icon" href="/Pictures/Elementary_logo.svg.png">
+</head>
+<body>
+    <nav id="nav"></nav>
+    <aside id="lat"></aside>
+
+    <main id="content">
+        <div class="content-header">
+            <h1>Bienvenido <span id="displayUsername">Usuario</span></h1>
+        </div>
+        
+        <div id="dashboard-grid">
+            <div id="left-column">
+                <div id="calendar-container" class="info-card">
+                    <div id="calendar-header">
+                        <button class="nav-btn" id="prevMonth">&lt;</button>
+                        <span id="monthDisplay"></span>
+                        <button class="nav-btn" id="nextMonth">&gt;</button>
+                    </div>
+                    <div id="calendar-weekdays">
+                        <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span><span>Do</span>
+                    </div>
+                    <div id="calendar-days-grid"></div>
+                </div>
+                <div class="info-card">
+                    <h2>Notas Rápidas</h2>
+                    <p>Apunta aquí tus ideas o recordatorios importantes del día.</p>
+                    <button class="small-btn" style="margin-top: 1rem;">Ver todas</button>
+                </div>
+            </div>
+
+            <div id="right-column">
+                <div id="upcoming-events-card" class="info-card">
+                    <h2>Próximas Entregas y Eventos</h2>
+                    <ul id="event-list">
+                        <li>
+                            <p><strong>Matemáticas II:</strong> Entrega de Proyecto Final</p>
+                            <small>Vence: 28/07/2025</small>
+                        </li>
+                        <li>
+                            <p><strong>Algoritmos:</strong> Examen Parcial</p>
+                            <small>Vence: 05/08/2025</small>
+                        </li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h2>Anuncios Recientes</h2>
+                    <ul class="announcement-list">
+                       <li class="announcement-item">
+                           <h3>Mantenimiento de Plataforma</h3>
+                           <p>El 01/08/2025 de 00:00 a 06:00 AM.</p>
+                       </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="main.js"></script>
+</body>
+</html>
