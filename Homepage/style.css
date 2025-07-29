@@ -759,3 +759,81 @@ body::before {
         color: white;
     }
 }
+
+/* --- ESTILOS PARA EL MODAL DE CONTENIDO --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #1a1a2e;
+    margin: 10% auto;
+    padding: 2rem;
+    border: 1px solid var(--blue-accent);
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    animation: fadeInModal 0.4s ease-out;
+}
+
+@keyframes fadeInModal {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal-btn {
+    color: #aaa;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal-btn:hover,
+.close-modal-btn:focus {
+    color: white;
+}
+
+#modal-title {
+    margin-bottom: 1.5rem;
+    color: var(--blue-accent);
+}
+
+#modal-body iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 5px;
+}
+
+#modal-body p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+#quick-notes-textarea {
+    width: 100%;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 1rem;
+    color: var(--text-color-dark);
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+    box-sizing: border-box;
+}

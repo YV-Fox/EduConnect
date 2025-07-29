@@ -54,10 +54,23 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         if (!registerButton.disabled) {
-            const username = form.nombre.value.trim();
+            const email = form.correo.value.trim();
+            const password = form.password.value;
+            const username = form.nombre.value.trim(); 
+
+            const newUser = { email, password, username };
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            if (users.some(user => user.email === email)) {
+                alert("Este correo electrónico ya está registrado. Por favor, inicia sesión.");
+                return;
+            }
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
             alert(`¡Registro exitoso, ${username}! Redirigiendo...`);
-            // Simulación de inicio de sesión tras registro
-            localStorage.setItem('loggedInUsername', username);
+            localStorage.setItem('loggedInUsername', username); 
             window.location.href = "homepage/start.html";
         }
     });

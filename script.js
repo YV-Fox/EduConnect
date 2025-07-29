@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("login-form");
-    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email"); 
     const passwordInput = document.getElementById("password");
     const loginButton = document.getElementById("login-button");
     let users = [];
@@ -9,38 +9,43 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch('users.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            users = await response.json();
+            const baseUsers = await response.json();
+            
+            const registeredUsers = JSON.parse(localStorage.getItem('users')) || [];
+            
+            users = [...baseUsers, ...registeredUsers];
+
         } catch (error) {
-            console.error("Error al cargar los usuarios:", error);
-            loginButton.disabled = true;
+            console.error("Error al cargar los usuarios base:", error);
+            const registeredUsers = JSON.parse(localStorage.getItem('users')) || [];
+            users = registeredUsers;
         }
     }
 
     function validateForm() {
-        const isUsernameValid = usernameInput.value.trim() !== "";
+        const isEmailValid = emailInput.value.trim() !== "";
         const isPasswordValid = passwordInput.value.trim() !== "";
-        loginButton.disabled = !(isUsernameValid && isPasswordValid);
+        loginButton.disabled = !(isEmailValid && isPasswordValid);
     }
 
     loadUsers();
 
-    // Validar en cada input del usuario
-    usernameInput.addEventListener("input", validateForm);
+    emailInput.addEventListener("input", validateForm);
     passwordInput.addEventListener("input", validateForm);
 
     loginForm.addEventListener("submit", function(event) {
         event.preventDefault();
         if (loginButton.disabled) return;
 
-        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
         const password = passwordInput.value;
-        const foundUser = users.find(user => user.username === username && user.password === password);
+        const foundUser = users.find(user => user.email === email && user.password === password);
 
         if (foundUser) {
             localStorage.setItem('loggedInUsername', foundUser.username);
             window.location.href = "homepage/start.html";
         } else {
-            alert("Nombre de usuario o contraseña incorrectos.");
+            alert("Correo electrónico o contraseña incorrectos.");
         }
     });
 });

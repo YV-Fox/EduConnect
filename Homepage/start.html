@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lato&display=swap" rel="stylesheet">
-    <link rel="icon" href="/Pictures/Elementary_logo.svg.png">
+    <link rel="icon" href="../Pictures/Elementary_logo.svg.png">
 </head>
 <body>
     <nav id="nav"></nav>
@@ -21,25 +21,28 @@
         
         <div id="dashboard-grid">
             <div id="left-column">
-                <div id="calendar-container" class="info-card">
-                    <div id="calendar-header">
-                        <button class="nav-btn" id="prevMonth">&lt;</button>
-                        <span id="monthDisplay"></span>
-                        <button class="nav-btn" id="nextMonth">&gt;</button>
-                    </div>
-                    <div id="calendar-weekdays">
-                        <span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span><span>Do</span>
-                    </div>
-                    <div id="calendar-days-grid"></div>
+                <div class="info-card">
+                    <h2>Mis Cursos Inscritos</h2>
+                    <div id="dashboard-enrolled-courses">
+                        </div>
+                    <a href="mis_cursos.html" class="full-width-btn" style="margin-top: 1rem;">Ver todos mis cursos</a>
                 </div>
+
                 <div class="info-card">
                     <h2>Notas Rápidas</h2>
-                    <p>Apunta aquí tus ideas o recordatorios importantes del día.</p>
-                    <button class="small-btn" style="margin-top: 1rem;">Ver todas</button>
+                    <div class="info-card-content">
+                        <textarea id="quick-notes-textarea" placeholder="Apunta aquí tus ideas o recordatorios..."></textarea>
+                        <button id="save-notes-btn" class="small-btn" style="margin-top: 1rem;">Guardar Notas</button>
+                    </div>
                 </div>
             </div>
 
             <div id="right-column">
+                <div class="info-card">
+                    <h2>Calificaciones Recientes</h2>
+                    <ul id="recent-grades-list" class="assignment-list">
+                       </ul>
+                </div>
                 <div id="upcoming-events-card" class="info-card">
                     <h2>Próximas Entregas y Eventos</h2>
                     <ul id="event-list">
@@ -51,15 +54,6 @@
                             <p><strong>Algoritmos:</strong> Examen Parcial</p>
                             <small>Vence: 05/08/2025</small>
                         </li>
-                    </ul>
-                </div>
-                <div class="info-card">
-                    <h2>Anuncios Recientes</h2>
-                    <ul class="announcement-list">
-                       <li class="announcement-item">
-                           <h3>Mantenimiento de Plataforma</h3>
-                           <p>El 01/08/2025 de 00:00 a 06:00 AM.</p>
-                       </li>
                     </ul>
                 </div>
             </div>

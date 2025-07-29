@@ -1,14 +1,17 @@
 [
   {
     "username": "ejemplo",
+    "email": "ejemplo@test.com",
     "password": "password123#"
   },
   {
     "username": "testuser",
+    "email": "testuser@test.com",
     "password": "SecurePassword#1"
   },
   {
     "username": "carlos",
+    "email": "carlos@test.com",
     "password": "@277353art"
   }
 ]

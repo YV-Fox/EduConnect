@@ -199,3 +199,24 @@
         grid-template-columns: 1fr;
     }
 }
+
+.info-card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#quick-notes-textarea {
+    flex-grow: 1; /* Permite que el textarea ocupe el espacio disponible */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 1rem;
+    color: var(--text-color-dark);
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 120px; /* Altura mínima */
+    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+}
